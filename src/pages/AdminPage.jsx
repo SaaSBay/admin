@@ -1,5 +1,5 @@
 // src/pages/AdminPage.jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   FiHome,
   FiUsers,
@@ -8,70 +8,77 @@ import {
   FiMenu,
   FiX,
   FiBell,
-  FiTrendingUp
-} from 'react-icons/fi';
-import AdminDashboard from '../components/AdminDashboard';
-import { useAuth } from '../services/AuthContext';
-import { useNavigate } from 'react-router-dom';
-
-
+  FiTrendingUp,
+} from "react-icons/fi";
+import AdminDashboard from "../components/AdminDashboard";
+import { useAuth } from "../services/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const AdminPage = () => {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    console.log('User logged out');
-    navigate('/');
+    console.log("User logged out");
+    navigate("/");
   };
 
   const navigation = [
     {
-      id: 'dashboard',
-      name: 'Dashboard',
+      id: "dashboard",
+      name: "Dashboard",
       icon: FiHome,
       component: AdminDashboard,
     },
     {
-      id: 'applications',
-      name: 'Applications',
+      id: "applications",
+      name: "Applications",
       icon: FiUsers,
       component: AdminDashboard,
     },
     {
-      id: 'analytics',
-      name: 'Analytics',
+      id: "analytics",
+      name: "Analytics",
       icon: FiTrendingUp,
-      component: () => <div className="p-6 text-gray-600">Analytics Coming Soon...</div>,
+      component: () => (
+        <div className="p-6 text-gray-600">Analytics Coming Soon...</div>
+      ),
     },
     {
-      id: 'settings',
-      name: 'Settings',
+      id: "settings",
+      name: "Settings",
       icon: FiSettings,
-      component: () => <div className="p-6 text-gray-600">Settings Coming Soon...</div>,
+      component: () => (
+        <div className="p-6 text-gray-600">Settings Coming Soon...</div>
+      ),
     },
   ];
 
-  const ActiveComponent = navigation.find(nav => nav.id === activeTab)?.component || AdminDashboard;
+  const ActiveComponent =
+    navigation.find((nav) => nav.id === activeTab)?.component || AdminDashboard;
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col lg:flex-row">
       {/* Sidebar */}
-      <aside className={`
+      <aside
+        className={`
         z-50 w-64 bg-white shadow-lg
         fixed inset-y-0 left-0 transform transition-transform duration-300 ease-in-out
-        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
         lg:translate-x-0 lg:static lg:inset-0
-      `}>
+      `}
+      >
         <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">S</span>
             </div>
-            <span className="text-xl font-semibold text-gray-900">SaaSBay Admin</span>
+            <span className="text-xl font-semibold text-gray-900">
+              SaaSBay Admin
+            </span>
           </div>
 
           {/* Close button on mobile */}
@@ -95,9 +102,11 @@ const AdminPage = () => {
                 }}
                 className={`
                   w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors
-                  ${activeTab === id
-                    ? 'bg-blue-50 text-blue-700 border-r-4 border-blue-600'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'}
+                  ${
+                    activeTab === id
+                      ? "bg-blue-50 text-blue-700 border-r-4 border-blue-600"
+                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  }
                 `}
               >
                 <Icon className="w-5 h-5 mr-3" />
@@ -158,8 +167,10 @@ const AdminPage = () => {
                   <span className="text-white text-sm font-medium">A</span>
                 </div>
                 <div className="hidden sm:block leading-tight">
-                  <p className="text-sm font-medium text-gray-900">Admin User</p>
-                  <p className="text-xs text-gray-500">admin@saasbay.com</p>
+                  <p className="text-sm font-medium text-gray-900">
+                    Admin User
+                  </p>
+                  <p className="text-xs text-gray-500">admin@saasbay.in</p>
                 </div>
               </div>
             </div>
@@ -171,31 +182,8 @@ const AdminPage = () => {
           <ActiveComponent />
         </main>
       </div>
-  <div className="absolute bottom-4 left-4 right-4">
-    <div className="border-t border-gray-200 pt-4">
-      {/* User Info */}
-      <div className="flex items-center px-4 py-2 mb-2">
-        <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-          <span className="text-white text-sm font-medium">
-            {user?.name?.charAt(0) || 'A'}
-          </span>
-        </div>
-        <div className="ml-2 hidden sm:block">
-          <p className="text-sm font-medium text-gray-900">{user?.name || 'Admin User'}</p>
-          <p className="text-xs text-gray-500">{user?.email}</p>
-        </div>
+      <div className="absolute bottom-4 left-4 right-4">
       </div>
-      
-      {/* Logout Button */}
-      <button 
-        onClick={handleLogout}
-        className="w-full flex items-center px-4 py-3 text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-red-700 rounded-lg transition-colors"
-      >
-        <FiLogOut className="w-5 h-5 mr-3" />
-        Sign Out
-      </button>
-    </div>
-  </div>
     </div>
   );
 };
