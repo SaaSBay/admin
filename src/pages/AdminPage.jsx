@@ -9,10 +9,17 @@ import {
   FiX,
   FiBell,
   FiTrendingUp,
+  FiMail,
+  FiBarChart2
 } from "react-icons/fi";
 import AdminDashboard from "../components/AdminDashboard";
+import AdminApplications from "../components/AdminApplications";
+import AdminContacts from '../components/AdminContacts';
+import AdminSettings from "../components/AdminSettings";
+import AdminAnalytics from "../components/AdminAnalytics";
 import { useAuth } from "../services/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Logo from '../assets/Saaslogo.png';
 
 const AdminPage = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -26,37 +33,38 @@ const AdminPage = () => {
     navigate("/");
   };
 
-  const navigation = [
-    {
-      id: "dashboard",
-      name: "Dashboard",
-      icon: FiHome,
-      component: AdminDashboard,
-    },
-    {
-      id: "applications",
-      name: "Applications",
-      icon: FiUsers,
-      component: AdminDashboard,
-    },
-    {
-      id: "analytics",
-      name: "Analytics",
-      icon: FiTrendingUp,
-      component: () => (
-        <div className="p-6 text-gray-600">Analytics Coming Soon...</div>
-      ),
-    },
-    {
-      id: "settings",
-      name: "Settings",
-      icon: FiSettings,
-      component: () => (
-        <div className="p-6 text-gray-600">Settings Coming Soon...</div>
-      ),
-    },
-  ];
-
+const navigation = [
+  { 
+    id: 'dashboard', 
+    name: 'Dashboard', 
+    icon: FiHome, 
+    component: AdminDashboard 
+  },
+  { 
+    id: 'applications', 
+    name: 'Applications', 
+    icon: FiUsers, 
+    component: AdminApplications
+  },
+  { 
+    id: 'contacts', 
+    name: 'Contacts', 
+    icon: FiMail, 
+    component: AdminContacts // Add this line
+  },
+  { 
+    id: 'analytics', 
+    name: 'Analytics', 
+    icon: FiBarChart2, 
+    component: AdminAnalytics
+  },
+  { 
+    id: 'settings', 
+    name: 'Settings', 
+    icon: FiSettings, 
+    component: AdminSettings
+  }
+];
   const ActiveComponent =
     navigation.find((nav) => nav.id === activeTab)?.component || AdminDashboard;
 
@@ -73,8 +81,8 @@ const AdminPage = () => {
       >
         <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">S</span>
+            <div className="w-8 h-8  rounded-lg flex items-center justify-center">
+              <img src={Logo} alt="SaaSBay Logo" className="w-10 h-10" />
             </div>
             <span className="text-xl font-semibold text-gray-900">
               SaaSBay Admin
@@ -156,10 +164,6 @@ const AdminPage = () => {
 
             {/* Right controls */}
             <div className="flex items-center space-x-4">
-              {/* Notifications */}
-              <button className="text-gray-500 hover:text-gray-700 p-2 rounded-lg hover:bg-gray-100">
-                <FiBell className="w-5 h-5" />
-              </button>
 
               {/* Admin profile */}
               <div className="flex items-center space-x-3">

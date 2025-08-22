@@ -40,6 +40,8 @@ export const AuthProvider = ({ children }) => {
           name: firebaseUser.displayName || 'Admin User',
           role: 'admin'
         });
+
+        console.log("User logged in:", firebaseUser.email);
       } else {
         setUser(null);
       }

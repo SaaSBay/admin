@@ -22,3 +22,10 @@ body {
   min-height: 100vh;
 }
 
+input,
+select,
+textarea {
+  background-color: #fff !important;
+  color: #111 !important;
+}
+
