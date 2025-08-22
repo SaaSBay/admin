@@ -19,7 +19,7 @@ import AdminSettings from "../components/AdminSettings";
 import AdminAnalytics from "../components/AdminAnalytics";
 import { useAuth } from "../services/AuthContext";
 import { useNavigate } from "react-router-dom";
-import Logo from '../assets/Saaslogo.png';
+import Logo from '../assets/SaasLogo.png';
 
 const AdminPage = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
